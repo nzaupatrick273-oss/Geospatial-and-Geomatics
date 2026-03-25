@@ -1,0 +1,38 @@
+// Admin login page
+app.get("/admin-login", (req, res) => {
+    res.send(`
+    <h1>Admin Login</h1>
+    <form action="/admin-login" method="POST">
+        <input type="text" name="username" placeholder="Username" required><br><br>
+        <input type="password" name="password" placeholder="Password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <a href="/">Back to Home</a>
+    `);
+});
+
+// Admin login POST
+app.post("/admin-login", (req, res) => {
+    const { username, password } = req.body;
+    if (username === "KIMANGI" && password === "Patrick") {
+        req.session.loggedIn = true;   // session is set
+        res.redirect("/admin");         // go to admin panel
+    } else {
+        res.send("Invalid credentials. <a href='/admin-login'>Try again</a>");
+    }
+});
+
+// Admin panel (upload)
+app.get("/admin", (req, res) => {
+    if (!req.session.loggedIn) return res.redirect("/admin-login"); // check session
+
+    res.send(`
+    <h1>Admin Panel</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload File</button>
+    </form>
+    <br>
+    <a href="/logout">Logout</a>
+    `);
+});
