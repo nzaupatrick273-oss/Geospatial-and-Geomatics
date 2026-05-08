@@ -285,5 +285,15 @@ app.get('/logout', (req, res) => {
   res.redirect('/admin-login');
 });
 
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>GEGIS HUB</h1>
+    <p>Welcome to Geomatics & Geospatial Hub</p>
+    <a href="/files">Go to Files</a>
+    <br>
+    <a href="/admin-login">Admin Login</a>
+  `);
+});
+
 /* ================= START ================= */
 module.exports = app;
