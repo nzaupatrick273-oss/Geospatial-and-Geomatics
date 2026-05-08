@@ -1,58 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; background-color: #f4f6f8; }
-    header { background-color: #007BFF; color: white; padding: 20px; text-align: center; }
-    nav { width: 200px; background-color: #fff; position: fixed; top: 80px; bottom: 0; left: 0; box-shadow: 2px 0 5px rgba(0,0,0,0.1); padding-top: 20px; }
-    nav a { display: block; padding: 12px 20px; color: #333; text-decoration: none; margin-bottom: 5px; }
-    nav a:hover { background-color: #007BFF; color: white; }
-    main { margin-left: 220px; padding: 20px; }
-    .card { background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .logout-btn { display: inline-block; padding: 10px 20px; background-color: #dc3545; color: white; border: none; border-radius: 5px; text-decoration: none; cursor: pointer; }
-    .logout-btn:hover { background-color: #c82333; }
-    input[type="file"] { margin-bottom: 10px; }
-    button.upload-btn { background-color: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; }
-    button.upload-btn:hover { background-color: #218838; }
-    ul { list-style: none; padding-left: 0; }
-    li { margin-bottom: 8px; }
-    li a { text-decoration: none; color: #007BFF; }
-    li a:hover { text-decoration: underline; }
-  </style>
+<meta charset="UTF-8">
+<title>Geomatic GIS Admin Dashboard</title>
+
+<style>
+/* ================= GLOBAL ================= */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f2f4f8;
+  color: #333;
+}
+
+/* ================= HEADER ================= */
+header {
+  background: linear-gradient(135deg, #007BFF, #0056b3);
+  color: white;
+  padding: 25px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* ================= LAYOUT ================= */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  width: 220px;
+  background: white;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  padding-top: 20px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: #333;
+  border-left: 4px solid transparent;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background: #f0f6ff;
+  border-left: 4px solid #007BFF;
+}
+
+/* logout */
+.logout {
+  color: white !important;
+  background: #dc3545;
+  margin: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+/* ================= MAIN ================= */
+.main {
+  flex: 1;
+  padding: 30px;
+}
+
+/* ================= CARDS ================= */
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* ================= FORM ================= */
+select, input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  border: none;
+  background: #007BFF;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* ================= FILE LIST ================= */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #f9fafc;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+li a {
+  text-decoration: none;
+  color: #007BFF;
+}
+
+.delete {
+  color: red;
+  font-weight: bold;
+}
+</style>
 </head>
+
 <body>
-  <header>
-    <h1>Admin Dashboard</h1>
-  </header>
 
-  <nav>
-    <a href="#">Dashboard Home</a>
-    <a href="#">Users</a>
-    <a href="#">Settings</a>
-    <a href="#">Reports</a>
-    <a href="/logout" class="logout-btn">Logout</a>
-  </nav>
+<header>
+  GEOMATIC ENGINEERING & GEOSPATIAL INFORMATION SYSTEMS
+</header>
 
-  <main>
-    <!-- Upload Form -->
+<div class="container">
+
+  <!-- ================= SIDEBAR ================= -->
+  <div class="sidebar">
+    <a href="#">📊 Dashboard</a>
+    <a href="#">📂 Files</a>
+    <a href="#">⚙ Settings</a>
+    <a href="/logout" class="logout">🚪 Logout</a>
+  </div>
+
+  <!-- ================= MAIN ================= -->
+  <div class="main">
+
+    <!-- UPLOAD WINDOW -->
     <div class="card">
-      <h2>Upload Document</h2>
+      <h2>📤 Upload Files</h2>
+
       <form action="/upload" method="POST" enctype="multipart/form-data">
-        <input type="file" name="file" required />
-        <br />
-        <button type="submit" class="upload-btn">Upload</button>
+
+        <label>Select Category</label>
+        <select name="category" required>
+          <option value="notes">📘 NOTES</option>
+          <option value="cat">📝 CAT</option>
+          <option value="exams">📄 EXAMS</option>
+        </select>
+
+        <input type="file" name="files" multiple required>
+
+        <button type="submit">Upload Files</button>
       </form>
     </div>
 
-    <!-- Uploaded Files List -->
+    <!-- FILES WINDOW -->
     <div class="card">
-      <h2>Uploaded Files</h2>
+      <h2>📁 Uploaded Materials</h2>
+
       <ul>
         {{filesList}}
       </ul>
     </div>
-  </main>
+
+  </div>
+</div>
+
 </body>
 </html>

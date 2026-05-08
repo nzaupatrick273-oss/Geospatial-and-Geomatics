@@ -1,30 +1,110 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #fdfdfd;
-    color: #333;
-    margin: 20px;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #eef2f5;
+  color: #333;
 }
 
-h1, h2 {
-    color: #1a73e8;
+/* ================= HEADER ================= */
+header {
+  background-color: #007BFF;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 22px;
+  letter-spacing: 1px;
 }
 
-a {
-    color: #1a73e8;
-    text-decoration: none;
+/* ================= MAIN DASHBOARD ================= */
+main {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 40px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+/* ================= MAIN CARDS ================= */
+.card {
+  background-color: white;
+  padding: 25px;
+  border-radius: 12px;
+  width: 260px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.25s ease;
+  text-align: center;
 }
 
-li {
-    margin: 5px 0;
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-input, button {
-    padding: 10px;
-    margin: 5px;
+/* ================= BUTTONS ================= */
+.card a {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 10px 15px;
+  background-color: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.card a:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* ================= ADMIN WINDOW ================= */
+.admin-card {
+  border: 2px dashed #444;
+  background: #fffdf5;
+}
+
+.admin-title {
+  font-style: italic;
+  color: #444;
+}
+
+/* ================= DESCRIPTION SECTION ================= */
+.description-box {
+  margin: 40px auto 70px;
+  max-width: 900px;
+  background: white;
+  padding: 35px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  line-height: 1.8;
+  transition: 0.3s;
+}
+
+.description-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+}
+
+.description-box h2 {
+  color: #007BFF;
+  margin-bottom: 15px;
+  font-size: 24px;
+}
+
+.description-box p {
+  color: #444;
+  font-size: 15px;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 800px) {
+  main {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 85%;
+  }
 }

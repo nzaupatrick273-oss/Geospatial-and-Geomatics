@@ -3,83 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <title>Geomatic Geospatial Dashboard</title>
+
+  <link rel="stylesheet" href="style.css">
+
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #eef2f5;
       margin: 0;
       padding: 0;
+      text-align: center;
     }
+
     header {
       background-color: #007BFF;
       color: white;
       padding: 20px;
-      text-align: center;
     }
+
     main {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 40px;
       gap: 20px;
+      padding: 40px;
     }
+
     .card {
       background-color: white;
-      padding: 30px;
+      padding: 25px;
       border-radius: 10px;
-      width: 250px;
-      text-align: center;
+      width: 260px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      transition: 0.2s;
     }
+
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
+
     .card a {
       display: inline-block;
-      margin-top: 20px;
-      padding: 12px 20px;
+      margin-top: 15px;
+      padding: 10px 15px;
       background-color: #007BFF;
       color: white;
       text-decoration: none;
       border-radius: 6px;
-      font-weight: bold;
     }
+
     .card a:hover {
       background-color: #0056b3;
     }
-    .card p {
-      margin-top: 10px;
-      color: #333;
-      font-size: 16px;
+
+    /* ADMIN STYLE */
+    .admin-card {
+      border: 2px dashed #333;
+      font-style: italic;
+      background: #fffdf5;
+    }
+
+    .admin-title {
+      font-style: italic;
+      color: #444;
+    }
+
+    /* DESCRIPTION SECTION */
+    .description-box {
+      margin: 30px auto 60px;
+      max-width: 900px;
+      background: rgb(25, 210, 179);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .description-box h2 {
+      color: #007BFF;
+      margin-bottom: 15px;
+    }
+
+    .description-box p {
+      color: #444;
+      font-size: 15px;
     }
   </style>
+
 </head>
+
 <body>
-  <header>
-    <h1>Geomatic Geospatial Dashboard</h1>
-  </header>
-  <main>
-    <!-- Admin Login Card -->
-    <div class="card">
-      <h2>Admin</h2>
-      <p>Login to the admin dashboard to upload and manage files</p>
-      <a href="/admin-login">Admin Login</a>
-    </div>
 
-    <!-- Available Files Card -->
-    <div class="card">
-      <h2>Files</h2>
-      <p>View all files available to the public</p>
-      <a href="/files">Available Files</a>
-    </div>
+<header>
+  <h1>Geomatic & Geospatial Materials</h1>
+</header>
 
-    <!-- Contact / Donate Card -->
-    <div class="card">
-      <h2>Contact / Donate</h2>
-      <p>Write, donate or contact: <strong>0714298946</strong></p>
-    </div>
-  </main>
+<!-- ================= MAIN WINDOWS ================= -->
+<main>
+
+  <!-- FILES WINDOW -->
+  <div class="card">
+    <h2>Files</h2>
+    <p>Access all available learning materials</p>
+    <a href="/files">View Files</a>
+  </div>
+
+  <!-- CONTACT WINDOW -->
+  <div class="card">
+    <h2>Contact / Donate</h2>
+    <p>For support contact: <strong>0714298946</strong></p>
+  </div>
+
+  <!-- ADMIN WINDOW -->
+  <div class="card admin-card">
+    <h2 class="admin-title"><i>Admin Login</i></h2>
+    <p><i>This is where administrators log in to manage files</i></p>
+    <a href="/admin-login">Enter Admin Panel</a>
+  </div>
+
+</main>
+
+<!-- ================= DESCRIPTION ================= -->
+<section class="description-box">
+
+  <h2>GEGIS Student Resource Hub</h2>
+
+  <p>
+    The GEGIS Student Resource Hub is a dedicated platform for students at
+    Jomo Kenyatta University of Agriculture and Technology pursuing
+    Geomatic Engineering and Geospatial Information Systems (GEGIS) and Geospatial Information Systems(GIS).
+    It provides centralized access to curated academic materials, including
+    lecture notes, past papers, practical resources, and reference content
+    designed to support learning and academic excellence.
+  </p>
+
+  <p>
+    Built to simplify access to essential course content, this platform enhances
+    collaboration, encourages independent study, and ensures students stay up to
+    date with their coursework. Whether preparing for exams, working on projects,
+    or strengthening key concepts, the GEGIS Hub serves as a reliable academic
+    companion throughout your studies.
+  </p>
+
+</section>
+
 </body>
 </html>

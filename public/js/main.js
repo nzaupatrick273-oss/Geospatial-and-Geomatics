@@ -1,29 +1,47 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("filesModal");
-    const btn = document.getElementById("view-files-btn");
-    const closeBtn = document.querySelector(".close-btn");
-    const fileList = document.getElementById("file-list");
+// FETCH FILES FROM SERVER
+async function loadFiles() {
+  const res = await fetch('/api/files');
+  const data = await res.json();
 
-    // Open modal
-    btn.addEventListener("click", async () => {
-        // Fetch file list from server
-        const res = await fetch("/api/files");
-        const files = await res.json();
+  displayFiles(data);
+}
 
-        fileList.innerHTML = files.length
-            ? files.map(f => `<li><a href="uploads/${f}" download>${f}</a></li>`).join("")
-            : "<li>No files uploaded yet.</li>";
+// DISPLAY FILES
+function displayFiles(files) {
 
-        modal.style.display = "block";
-    });
+  const categories = {
+    notes: document.getElementById("notes"),
+    cat: document.getElementById("cat"),
+    exams: document.getElementById("exams")
+  };
 
-    // Close modal
-    closeBtn.addEventListener("click", () => {
-        modal.style.display = "none";
-    });
+  // CLEAR
+  Object.values(categories).forEach(el => el.innerHTML = "");
 
-    // Close when clicking outside modal
-    window.addEventListener("click", (e) => {
-        if (e.target === modal) modal.style.display = "none";
-    });
-});
+  files.forEach(file => {
+
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <h4>${file.name}</h4>
+      <button class="read-btn">📖 Read</button>
+      <button class="download-btn">⬇ Download</button>
+    `;
+
+    // READ BUTTON → opens inside your site
+    card.querySelector(".read-btn").onclick = () => {
+      window.location.href = `/view?url=${encodeURIComponent(file.readUrl)}`;
+    };
+
+    // DOWNLOAD BUTTON
+    card.querySelector(".download-btn").onclick = () => {
+      window.open(file.downloadUrl, "_blank");
+    };
+
+    categories[file.category].appendChild(card);
+  });
+}
+
+// LOAD ON PAGE OPEN
+loadFiles();
